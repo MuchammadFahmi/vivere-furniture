@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VI VE RE - Furniture & Home Living</title>
+  <meta name="description"
+    content="Toko furniture dan perabot modern dengan desain elegan minimalis. Nikmati kemudahan berbelanja online perabot rumah idaman Anda.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="transaction.css">
+</head>
+
+<body>
+
+  <!-- 1. ANNOUNCEMENT TOP BAR -->
+  <div class="announcement-bar">
+    <span>THIS WEEKEND: <strong>SALE 20% OFF</strong> ON ALL PRODUCTS</span>
+  </div>
+
+  <!-- 2. TOP INFO & SEARCH BAR -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-location">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        <span> Jl. Gading Serpong Boulevard Blok O No. 7 & 8, Pagedangan, Tangerang, Banten
+          15334</span>
+      </div>
+
+      <div class="search-box-wrapper">
+        <select class="category-select" id="searchCategorySelect" aria-label="Select Category">
+          <option value="all">All Categories</option>
+          <option value="armchairs">Armchairs</option>
+          <option value="sofas">Sofas</option>
+          <option value="chairs">Chairs</option>
+          <option value="tables">Tables</option>
+          <option value="cabinets">Cabinets</option>
+          <option value="decor">Decor</option>
+        </select>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search product...">
+        <button class="search-btn" id="searchSubmitBtn" aria-label="Cari produk">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="top-phone">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path
+            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+          </path>
+        </svg>
+        <span>(+62) 8119 4237 03 </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. MAIN HEADER / NAVIGATION -->
+  <header class="main-header">
+    <div class="container">
+      <a href="index.html" class="brand-logo">
+        <img src="asset/logo.png" alt="VI VE RE Furniture" class="brand-logo-img">
+      </a>
+
+      <!-- Mobile Menu Toggle -->
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+      </button>
+
+      <nav>
+        <div class="nav-overlay" id="navOverlay"></div>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop / Produk</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <!-- User Account -->
+        <button class="action-btn" aria-label="Account">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </button>
+
+        <!-- Wishlist -->
+        <button class="action-btn" aria-label="Wishlist">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+            </path>
+          </svg>
+        </button>
+
+        <!-- Shopping Cart Trigger -->
+        <button class="action-btn" id="openCartBtn" aria-label="Cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="cart-count" id="cartCountBadge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 4. HERO SECTION -->
+  <section class="hero-section">
+    <!-- Hero Slideshow Background -->
+    <div class="hero-slideshow">
+      <div class="hero-slide active" style="background-image: url('asset/herosection1.jpeg')"></div>
+      <div class="hero-slide" style="background-image: url('asset/herosection2.png')"></div>
+      <div class="hero-slide" style="background-image: url('asset/herosection3.png')"></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="container">
+      <div class="hero-grid">
+        <!-- Left Side: Hero Statement -->
+        <div class="hero-content">
+          <div class="hero-badge">Furniture & Living</div>
+          <h1 class="hero-title">Where Traditional<br>Meets Modern</h1>
+          <p class="hero-description">
+            Kombinasi sempurna keindahan kayu klasik dan siluet interior modern. Hadirkan kehangatan serta kenyamanan
+            ekstra di setiap sudut ruangan Anda.
+          </p>
+          <div class="hero-buttons">
+            <a href="#products-section" class="btn btn-primary">Shop now</a>
+            <a href="about.html" class="btn btn-outline">Learn more</a>
+          </div>
+        </div>
+
+        <!-- Right Side: Product Collage & Promo Card (Matching Mockup) -->
+          <!-- Right Side: Dynamic Product Collage -->
+          <div class="hero-collage" id="heroCollage">
+            <!-- JS will inject product cards here -->
+          </div>
+          <script>
+            // Load products from admin storage (or fallback demo)
+            function loadHeroProducts() {
+              try {
+                const raw = localStorage.getItem('vivere_admin_products');
+                if (raw) {
+                  const arr = JSON.parse(raw);
+                  if (Array.isArray(arr) && arr.length) return arr;
+                }
+              } catch (e) {}
+              // fallback minimal set
+              return [
+                { id: 1, name: "Papasan Bowl Chair", price: 3750000, badge: "SALE", image: "asset/chair_papasan.jpg" },
+                { id: 2, name: "Classic Dining Chair", price: 1500000, image: "asset/chair_dining.jpg" },
+                { id: 3, name: "White Minimalist Desk", price: 4800000, badge: "NEW", image: "asset/table_desk.jpg" },
+                { id: 4, name: "Egg Lounge Chair", price: 6750000, oldPrice: 7900000, badge: "HOT", image: "asset/chair_egg.jpg" }
+              ];
+            }
+            function formatRupiah(num) {
+              return 'Rp ' + Number(num).toLocaleString('id-ID');
+            }
+            function renderHeroCollage() {
+              const products = loadHeroProducts().slice(0, 4);
+              const container = document.getElementById('heroCollage');
+              if (!container) return;
+              container.innerHTML = products.map(p => {
+                const badgeTag = p.badge ? `<span class="price-tag">${p.badge}</span>` : '';
+                const priceTag = `<span class="price-tag">${formatRupiah(p.price)}</span>`;
+                return `
+                  <div class="collage-card">
+                    ${badgeTag || priceTag}
+                    <div class="card-placeholder-img">
+                      <img src="${p.image}" alt="${p.name}" class="product-thumb-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+                      <div style="display:none; width:100%; height:100%; align-items:center; justify-content:center;"></div>
+                    </div>
+                    <span class="placeholder-label">${p.name}</span>
+                  </div>`;
+              }).join('');
+            }
+            document.addEventListener('DOMContentLoaded', renderHeroCollage);
+          </script>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. VALUE PROPOSITION PERKS BAR -->
+  <section class="perks-bar">
+    <div class="container">
+      <div class="perks-grid">
+        <div class="perk-item">
+          <div class="perk-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="3" width="15" height="13"></rect>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+              <circle cx="5.5" cy="18.5" r="2.5"></circle>
+              <circle cx="18.5" cy="18.5" r="2.5"></circle>
+            </svg>
+          </div>
+          <div>
+            <h3 class="perk-title">Free Shipping</h3>
+            <p class="perk-subtitle">Untuk pesanan di atas $150</p>
+          </div>
+        </div>
+
+        <div class="perk-item">
+          <div class="perk-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <div>
+            <h3 class="perk-title">Garansi 2 Tahun</h3>
+            <p class="perk-subtitle">Material kayu solid pilihan</p>
+          </div>
+        </div>
+
+        <div class="perk-item">
+          <div class="perk-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 14 14"></polyline>
+            </svg>
+          </div>
+          <div>
+            <h3 class="perk-title">30 Hari Pengembalian</h3>
+            <p class="perk-subtitle">Bebas repot & uang kembali</p>
+          </div>
+        </div>
+
+        <div class="perk-item">
+          <div class="perk-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </div>
+          <div>
+            <h3 class="perk-title">Support 24/7</h3>
+            <p class="perk-subtitle">Konsultasi interior instan</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. SHOP BY CATEGORIES SECTION -->
+  <section class="section" id="categories-section">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Shop by Categories</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">Pilih kategori furnitur sesuai
+            kebutuhan ruang Anda</p>
+        </div>
+        <button class="btn-view-all">View all</button>
+      </div>
+
+      <!-- Categories Pills -->
+      <div class="categories-grid">
+        <div class="category-card" data-cat="armchairs">
+          <div class="cat-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 9l1.25-2.5A2 2 0 0 0 18.46 3.5L16 4.75"></path>
+              <path d="M5 9l-1.25-2.5A2 2 0 0 1 5.54 3.5L8 4.75"></path>
+              <rect x="3" y="9" width="18" height="7" rx="2"></rect>
+              <path d="M5 16v4"></path>
+              <path d="M19 16v4"></path>
+            </svg>
+          </div>
+          <div>
+            <div class="cat-name">Armchairs</div>
+            <div class="cat-count">124 products</div>
+          </div>
+        </div>
+
+        <div class="category-card" data-cat="cabinets">
+          <div class="cat-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="3" width="16" height="18" rx="2"></rect>
+              <line x1="12" y1="3" x2="12" y2="21"></line>
+              <circle cx="9" cy="12" r="1"></circle>
+              <circle cx="15" cy="12" r="1"></circle>
+            </svg>
+          </div>
+          <div>
+            <div class="cat-name">Cabinets</div>
+            <div class="cat-count">20 products</div>
+          </div>
+        </div>
+
+        <div class="category-card" data-cat="sofas">
+          <div class="cat-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="10" width="20" height="8" rx="2"></rect>
+              <path d="M5 10V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4"></path>
+              <path d="M4 18v3"></path>
+              <path d="M20 18v3"></path>
+            </svg>
+          </div>
+          <div>
+            <div class="cat-name">Sofas</div>
+            <div class="cat-count">42 products</div>
+          </div>
+        </div>
+
+        <div class="category-card" data-cat="chairs">
+          <div class="cat-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 19v3"></path>
+              <path d="M18 19v3"></path>
+              <path d="M6 11h12v4a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-4z"></path>
+              <path d="M6 11V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v7"></path>
+            </svg>
+          </div>
+          <div>
+            <div class="cat-name">Chairs</div>
+            <div class="cat-count">120 products</div>
+          </div>
+        </div>
+
+        <div class="category-card" data-cat="decor">
+          <div class="cat-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+            </svg>
+          </div>
+          <div>
+            <div class="cat-name">Decor</div>
+            <div class="cat-count">299 products</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category Aesthetic Showcase Strip (Matching bottom of reference) -->
+      <div class="category-showcase-strip">
+        <a href="shop.html?category=Tables" class="showcase-tile">
+          <img src="asset/table_dining.jpg" alt="Modern Table Sets" class="showcase-img" loading="lazy">
+          <span class="tile-label">Modern Table Sets</span>
+        </a>
+
+        <a href="shop.html?category=Chairs" class="showcase-tile">
+          <img src="asset/chair_dining.jpg" alt="Nordic Curved Chairs" class="showcase-img" loading="lazy">
+          <span class="tile-label">Nordic Curved Chairs</span>
+        </a>
+
+        <a href="shop.html?category=Chairs" class="showcase-tile">
+          <img src="asset/chair_armchair.jpg" alt="Teak Wood Armchairs" class="showcase-img" loading="lazy">
+          <span class="tile-label">Teak Wood Armchairs</span>
+        </a>
+
+        <a href="shop.html?category=Sofas" class="showcase-tile">
+          <img src="asset/sofa_fabric.jpg" alt="Cozy Fabric Sofas" class="showcase-img" loading="lazy">
+          <span class="tile-label">Cozy Fabric Sofas</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. FEATURED PRODUCTS (SHOP) SECTION -->
+  <section class="section" id="products-section" style="background-color: #FAF8F5;">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Trending Products</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">Paling banyak diminati dan siap
+            dikirim ke rumah Anda</p>
+        </div>
+        <div style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">
+          Showing <span id="productCountLabel">8</span> results
+        </div>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="products-filter-tabs">
+        <button class="tab-btn active" data-filter="all">All Products</button>
+        <button class="tab-btn" data-filter="armchairs">Armchairs</button>
+        <button class="tab-btn" data-filter="chairs">Chairs</button>
+        <button class="tab-btn" data-filter="sofas">Sofas</button>
+        <button class="tab-btn" data-filter="tables">Tables</button>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products-grid" id="productsContainer">
+        <!-- Rendered dynamically by app.js with full fallback in HTML -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. ABOUT PREVIEW & NEWSLETTER SECTION -->
+  <section class="promo-strip-section" id="about-preview">
+    <div class="container">
+      <div class="promo-strip">
+        <div>
+          <h2>Get 10% Off Your First Order</h2>
+          <p>Daftarkan email Anda untuk mendapatkan inspirasi desain ruangan, diskon peluncuran produk baru, serta
+            penawaran eksklusif.</p>
+        </div>
+        <div>
+          <form class="newsletter-form" id="newsletterForm"
+            onsubmit="event.preventDefault(); alert('Terima kasih telah berlangganan!');">
+            <input type="email" class="newsletter-input" placeholder="Masukkan alamat email Anda" required>
+            <button type="submit" class="btn btn-primary" style="white-space: nowrap;">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. FOOTER -->
+  <footer class="main-footer" id="footer-section">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo">
+            <img src="asset/logo.png" alt="VI VE RE Furniture" class="brand-logo-img">
+          </a>
+          <p class="footer-desc">
+            Menghadirkan keindahan, kenyamanan, dan kualitas tanpa kompromi untuk melengkapi hunian terbaik Anda.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-icon" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+            <a href="#" class="social-icon" aria-label="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+              </svg>
+            </a>
+            <a href="#" class="social-icon" aria-label="Twitter">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path
+                  d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+                </path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Navigasi Cepat</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop / Produk</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="login.html">Login / Akun</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Kategori Populer</h4>
+          <ul class="footer-links">
+            <li><a href="shop.html?cat=armchairs">Armchairs & Lounge</a></li>
+            <li><a href="shop.html?cat=chairs">Dining & Study Chairs</a></li>
+            <li><a href="shop.html?cat=sofas">Modern Sofas</a></li>
+            <li><a href="shop.html?cat=tables">Wooden Tables</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Hubungi Kami</h4>
+          <ul class="footer-contact">
+            <li>
+              <span>📍</span>
+              <span>Jl. Gading Serpong Boulevard Blok O No. 7 & 8, Pagedangan, Tangerang, Banten</span>
+            </li>
+            <li>
+              <span>📞</span>
+              <span>(+62) 8119 4237 03</span>
+            </li>
+            <li>
+              <span>✉️</span>
+              <span>customercare@viverecollection.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 VI VE RE Furniture Store. All Rights Reserved.</div>
+        <div style="color: var(--text-light);">Designed with warmth and elegance.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 10. SLIDE-OUT CART DRAWER -->
+  <div class="cart-backdrop" id="cartBackdrop"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Cart">
+    <div class="drawer-header">
+      <div class="drawer-title">
+        <span>Keranjang Belanja</span>
+        <span class="drawer-items-count" id="drawerBadge">0 item</span>
+      </div>
+      <button class="btn-close-drawer" id="closeCartBtn" aria-label="Tutup Keranjang">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer-body">
+      <div class="cart-items-list" id="cartItemsContainer">
+        <!-- Cart Items inserted via JavaScript -->
+      </div>
+      <div class="cart-empty-state" id="cartEmptyState">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        <p style="font-weight: 700; margin-bottom: 4px;">Keranjang Masih Kosong</p>
+        <p style="font-size: 0.85rem;">Yuk pilih produk furniture favorit Anda dan tambahkan ke sini!</p>
+      </div>
+    </div>
+
+    <div class="drawer-footer" id="drawerFooter">
+      <div class="subtotal-row">
+        <span>Subtotal</span>
+        <span id="cartSubtotal" style="font-weight: 700;">Rp 0</span>
+      </div>
+      <div class="subtotal-row">
+        <span style="color: var(--text-muted); font-size: 0.82rem;">Estimasi Ongkir</span>
+        <span style="font-size: 0.82rem; color: #2E8540; font-weight: 600;">GRATIS</span>
+      </div>
+      <div class="subtotal-row total-amount">
+        <span>Total Pembayaran</span>
+        <span id="cartTotal" style="color: var(--primary);">Rp 0</span>
+      </div>
+      <button class="btn-checkout" id="checkoutBtn">
+        <span>Lanjut ke Pembayaran</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- 11. TOAST NOTIFICATION -->
+  <div class="toast-notice" id="toastNotice">
+    <span class="toast-icon">✓</span>
+    <span id="toastMessage">Produk berhasil ditambahkan ke keranjang!</span>
+  </div>
+
+  <!-- Supabase & Auth Integration -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="auth-nav.js"></script>
+  <script src="transaction.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>

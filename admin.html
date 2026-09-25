@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - VI VE RE Furniture</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="auth.css">
+  <link rel="stylesheet" href="transaction.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body class="admin-body">
+  <!-- Sidebar -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-header">
+      <img src="asset/logo.png" alt="VI VE RE Logo" class="sidebar-logo" onerror="this.style.display='none'">
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span class="sidebar-title">VI VE RE</span>
+        <span class="sidebar-badge">ADMIN PORTAL</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-menu">
+      <div class="menu-category-title">Menu Utama</div>
+      <button class="sidebar-item active" data-tab="dashboard">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="9"></rect>
+          <rect x="14" y="3" width="7" height="5"></rect>
+          <rect x="14" y="12" width="7" height="9"></rect>
+          <rect x="3" y="16" width="7" height="5"></rect>
+        </svg>
+        <span>Ringkasan Bisnis</span>
+      </button>
+
+      <button class="sidebar-item" data-tab="products">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        <span>Manajemen Produk</span>
+      </button>
+
+      <button class="sidebar-item" data-tab="orders">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        <span>Pesanan Masuk</span>
+      </button>
+
+      <div class="menu-category-title" style="margin-top: 10px;">Sistem & Database</div>
+      <button class="sidebar-item" data-tab="supabase">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+          <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+          <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+        </svg>
+        <span>Konfigurasi Supabase</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="admin-profile-snippet">
+        <div class="admin-avatar" id="adminAvatarLetter">A</div>
+        <div class="admin-info">
+          <span class="admin-name" id="adminName">Admin VI VE RE</span>
+          <span class="admin-role">Administrator</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main View -->
+  <main class="admin-main">
+    <!-- Topbar -->
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <h1 class="topbar-page-title" id="pageTitle">Ringkasan Bisnis</h1>
+      </div>
+      <div class="topbar-right">
+        <a href="index.html" target="_blank" class="btn-topbar-link btn-visit-store">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+          <span>Lihat Website Toko</span>
+        </a>
+        <button type="button" class="btn-topbar-link btn-admin-logout" id="logoutAdminBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          <span>Keluar</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Content Sections -->
+    <div class="admin-content-wrap">
+      <!-- Section 1: Dashboard Overview -->
+      <div class="admin-tab-pane" id="pane-dashboard">
+        <!-- Stat Cards -->
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <div class="stat-details">
+              <span class="stat-label">Total Omset Bulan Ini</span>
+              <span class="stat-value" id="statRevenue">Rp 48.650.000</span>
+              <span class="stat-growth">↑ +18.4% dari bulan lalu</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+              </svg>
+            </div>
+            <div class="stat-details">
+              <span class="stat-label">Pesanan Baru</span>
+              <span class="stat-value" id="statOrders">38</span>
+              <span class="stat-growth">↑ 8 menunggu pengiriman</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+            </div>
+            <div class="stat-details">
+              <span class="stat-label">Katalog Produk</span>
+              <span class="stat-value" id="statProductCount">12</span>
+              <span class="stat-growth" style="color: var(--admin-accent);">Aktif di etalase</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <div class="stat-details">
+              <span class="stat-label">Pelanggan Terdaftar</span>
+              <span class="stat-value">142</span>
+              <span class="stat-growth">↑ +12 minggu ini</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Orders Preview in Dashboard -->
+        <div class="admin-panel-card" style="margin-top: 24px;">
+          <div class="panel-header">
+            <h2 class="panel-title">Pesanan Masuk Terbaru</h2>
+            <button class="btn-primary-admin" onclick="document.querySelector('[data-tab=orders]').click()">
+              Lihat Semua Pesanan
+            </button>
+          </div>
+          <div class="admin-table-container">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>No. Pesanan</th>
+                  <th>Pelanggan</th>
+                  <th>Produk</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="dashboardOrdersTableBody">
+                <!-- Dynamically Populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Product Management -->
+      <div class="admin-tab-pane" id="pane-products" style="display: none;">
+        <div class="admin-panel-card">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Daftar Produk Furniture</h2>
+              <span style="font-size: 0.82rem; color: var(--admin-text-muted);">Kelola nama, harga, stok, dan kategori produk</span>
+            </div>
+            <button class="btn-primary-admin" id="openAddProductModalBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              <span>Tambah Produk Baru</span>
+            </button>
+          </div>
+
+          <div class="admin-table-container">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Produk</th>
+                  <th>Kategori</th>
+                  <th>Harga & Diskon</th>
+                  <th>Stok Status</th>
+                  <th>Badge</th>
+                  <th style="text-align: right;">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="productsTableBody">
+                <!-- Dynamically Populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 3: Orders Management -->
+      <div class="admin-tab-pane" id="pane-orders" style="display: none;">
+        <div class="admin-panel-card">
+          <div class="panel-header" style="flex-wrap: wrap; gap: 14px;">
+            <div>
+              <h2 class="panel-title">Semua Pesanan Transaksi</h2>
+              <span style="font-size: 0.82rem; color: var(--admin-text-muted);">Pantau, kelola resi pengiriman, dan ubah status pesanan pembeli secara realtime</span>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+              <button type="button" class="btn-primary-admin" id="runAutoTestBtn" style="background: rgba(16, 185, 129, 0.15); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.35);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                <span>🧪 Uji Otomatis Transaksi</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Order Filter Bar -->
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 18px; flex-wrap: wrap;">
+            <div class="admin-filter-tabs" id="orderFilterTabs" style="display: flex; gap: 8px;">
+              <button type="button" class="tab-btn active" data-order-status="all" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 6px;">Semua Pesanan</button>
+              <button type="button" class="tab-btn" data-order-status="Diproses" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 6px;">Diproses</button>
+              <button type="button" class="tab-btn" data-order-status="Dikirim" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 6px;">Dikirim</button>
+              <button type="button" class="tab-btn" data-order-status="Selesai" style="padding: 6px 14px; font-size: 0.8rem; border-radius: 6px;">Selesai</button>
+            </div>
+            <div style="min-width: 260px;">
+              <input type="text" id="orderSearchInput" class="auth-input" style="background: #181615; color: #FFF; padding: 7px 12px; font-size: 0.82rem; border-color: var(--admin-border);" placeholder="Cari No. Pesanan / Nama...">
+            </div>
+          </div>
+
+          <div class="admin-table-container">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>No. Pesanan & Resi</th>
+                  <th>Tanggal</th>
+                  <th>Pelanggan</th>
+                  <th>Kurir & Alamat</th>
+                  <th>Total & Metode</th>
+                  <th>Status</th>
+                  <th style="text-align: right;">Aksi & Status</th>
+                </tr>
+              </thead>
+              <tbody id="allOrdersTableBody">
+                <!-- Dynamically Populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 4: Supabase Settings -->
+      <div class="admin-tab-pane" id="pane-supabase" style="display: none;">
+        <div class="admin-panel-card" style="max-width: 800px;">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Koneksi Database Supabase</h2>
+              <span style="font-size: 0.82rem; color: var(--admin-text-muted);">Atur kredensial Supabase untuk sinkronisasi live authentication dan database</span>
+            </div>
+          </div>
+
+          <form id="adminSupabaseForm" style="display: flex; flex-direction: column; gap: 16px;">
+            <div class="form-group">
+              <label class="form-label" style="color: #FFFFFF;">Supabase Project URL</label>
+              <input type="url" id="adminCfgUrl" class="auth-input" style="background: #181615; color: #FFF; border-color: var(--admin-border);" placeholder="https://yourproject.supabase.co" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" style="color: #FFFFFF;">Supabase Anon Public Key</label>
+              <textarea id="adminCfgKey" class="auth-input" style="background: #181615; color: #FFF; border-color: var(--admin-border); min-height: 90px; resize: vertical;" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." required></textarea>
+            </div>
+
+            <div id="adminModalAlert" style="display: none;"></div>
+
+            <div style="display: flex; gap: 12px; margin-top: 8px;">
+              <button type="submit" class="btn-primary-admin" style="padding: 12px 24px;">
+                Simpan & Sambungkan Supabase
+              </button>
+              <button type="button" class="btn-topbar-link btn-visit-store" id="adminResetDemoBtn" style="padding: 12px 20px;">
+                Reset ke Mode Demo
+              </button>
+            </div>
+          </form>
+
+          <div style="margin-top: 30px; border-top: 1px solid var(--admin-border); padding-top: 20px;">
+            <h3 style="font-size: 1rem; color: var(--admin-accent); margin-bottom: 8px;">Panduan Setup Skema Database di Supabase</h3>
+            <p style="font-size: 0.85rem; color: var(--admin-text-muted); line-height: 1.5; margin-bottom: 12px;">
+              Untuk mengaktifkan pembagian peran User & Admin secara otomatis di Supabase, jalankan file SQL yang telah disiapkan di Supabase SQL Editor.
+            </p>
+            <div class="modal-code-hint">
+              File skrip: <code>supabase-setup.sql</code><br>
+              Tabel yang dibuat: <code>public.profiles</code> (id, full_name, role, created_at)<br>
+              Trigger: Otomatis menetapkan role ('admin' atau 'user') saat akun didaftarkan.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal Tambah Produk -->
+  <div class="auth-modal-overlay" id="addProductModal">
+    <div class="auth-modal-card" style="background: var(--admin-card); color: #FFF; border: 1px solid var(--admin-border); max-width: 580px;">
+      <button type="button" class="modal-close-btn" id="closeAddProductModalBtn" style="color: #FFF;">&times;</button>
+      <h2 class="modal-title" style="color: #FFF;">Tambah Produk Baru</h2>
+      <p class="modal-desc" style="color: var(--admin-text-muted);">Masukkan informasi furnitur, harga diskon, dan foto produk ke katalog.</p>
+
+      <form id="addProductForm" style="display: flex; flex-direction: column; gap: 14px;">
+        <div class="form-group">
+          <label class="form-label" style="color: #FFF;">Nama Produk</label>
+          <input type="text" id="newProdName" class="auth-input" style="background: #181615; color: #FFF;" placeholder="Contoh: Scandinavian Oak Lounge" required>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="form-group">
+            <label class="form-label" style="color: #FFF;">Kategori</label>
+            <select id="newProdCategory" class="auth-input" style="background: #181615; color: #FFF; padding-left: 14px;">
+              <option value="armchairs">Armchairs</option>
+              <option value="chairs">Chairs</option>
+              <option value="sofas">Sofas</option>
+              <option value="tables">Tables</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" style="color: #FFF;">Badge Promo</label>
+            <select id="newProdBadge" class="auth-input" style="background: #181615; color: #FFF; padding-left: 14px;">
+              <option value="">Otomatis (Berdasarkan Diskon)</option>
+              <option value="SALE">SALE</option>
+              <option value="HOT">HOT</option>
+              <option value="NEW">NEW</option>
+              <option value="BEST SELLER">BEST SELLER</option>
+              <option value="NONE">Tanpa Badge</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="form-group">
+            <label class="form-label" style="color: #FFF;">Harga Jual / Promo (Rp)</label>
+            <input type="number" id="newProdPrice" class="auth-input" style="background: #181615; color: #FFF;" placeholder="3750000" min="10000" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" style="color: #FFF;">Harga Normal / Coret (Rp)</label>
+            <input type="number" id="newProdOldPrice" class="auth-input" style="background: #181615; color: #FFF;" placeholder="4800000 (Opsional)">
+          </div>
+        </div>
+
+        <!-- Live Discount Calculation Box -->
+        <div class="discount-calc-box" id="newProdDiscountBox" style="display: none;">
+          <span>🎉 Info Diskon Terhitung:</span>
+          <span class="discount-calc-val" id="newProdDiscountText">-0% (Hemat Rp 0)</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" style="color: #FFF;">Status Stok</label>
+          <input type="text" id="newProdStock" class="auth-input" style="background: #181615; color: #FFF;" placeholder="Tersedia (20 unit)">
+        </div>
+
+        <!-- Visual Photo Selector -->
+        <div class="form-group">
+          <label class="photo-picker-label">Pilih Foto Produk (Koleksi VI VE RE)</label>
+          <div class="photo-picker-grid" id="newPhotoPickerGrid">
+            <!-- Dynamically Rendered Photo Swatches -->
+          </div>
+          <input type="text" id="newProdImage" class="auth-input" style="background: #181615; color: #FFF; font-size: 0.8rem;" placeholder="Atau masukkan URL foto custom (https://... atau asset/...)">
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-top: 10px;">
+          <button type="submit" class="btn-primary-admin" style="flex: 1; padding: 12px; justify-content: center;">
+            Simpan Produk
+          </button>
+          <button type="button" class="btn-topbar-link btn-visit-store" id="cancelAddProductBtn" style="padding: 12px 20px;">
+            Batal
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Edit Produk (CRUD Update) -->
+  <div class="auth-modal-overlay" id="editProductModal">
+    <div class="auth-modal-card" style="background: var(--admin-card); color: #FFF; border: 1px solid var(--admin-border); max-width: 580px;">
+      <button type="button" class="modal-close-btn" id="closeEditProductModalBtn" style="color: #FFF;">&times;</button>
+      <h2 class="modal-title" style="color: #FFF;">Edit Produk & Diskon</h2>
+      <p class="modal-desc" style="color: var(--admin-text-muted);">Perbarui detail informasi, harga promo diskon, dan foto produk.</p>
+
+      <form id="editProductForm" style="display: flex; flex-direction: column; gap: 14px;">
+        <input type="hidden" id="editProdId">
+
+        <div class="form-group">
+          <label class="form-label" style="color: #FFF;">Nama Produk</label>
+          <input type="text" id="editProdName" class="auth-input" style="background: #181615; color: #FFF;" required>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="form-group">
+            <label class="form-label" style="color: #FFF;">Kategori</label>
+            <select id="editProdCategory" class="auth-input" style="background: #181615; color: #FFF; padding-left: 14px;">
+              <option value="armchairs">Armchairs</option>
+              <option value="chairs">Chairs</option>
+              <option value="sofas">Sofas</option>
+              <option value="tables">Tables</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" style="color: #FFF;">Badge Promo</label>
+            <select id="editProdBadge" class="auth-input" style="background: #181615; color: #FFF; padding-left: 14px;">
+              <option value="">Otomatis (Berdasarkan Diskon)</option>
+              <option value="SALE">SALE</option>
+              <option value="HOT">HOT</option>
+              <option value="NEW">NEW</option>
+              <option value="BEST SELLER">BEST SELLER</option>
+              <option value="NONE">Tanpa Badge</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="form-group">
+            <label class="form-label" style="color: #FFF;">Harga Jual / Promo (Rp)</label>
+            <input type="number" id="editProdPrice" class="auth-input" style="background: #181615; color: #FFF;" required min="10000">
+          </div>
+          <div class="form-group">
+            <label class="form-label" style="color: #FFF;">Harga Normal / Coret (Rp)</label>
+            <input type="number" id="editProdOldPrice" class="auth-input" style="background: #181615; color: #FFF;" placeholder="Kosongkan jika tdk ada diskon">
+          </div>
+        </div>
+
+        <!-- Live Discount Calculation Box -->
+        <div class="discount-calc-box" id="editProdDiscountBox">
+          <span>🎉 Info Diskon Terhitung:</span>
+          <span class="discount-calc-val" id="editProdDiscountText">-0% (Hemat Rp 0)</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" style="color: #FFF;">Status Stok</label>
+          <input type="text" id="editProdStock" class="auth-input" style="background: #181615; color: #FFF;" placeholder="Contoh: Tersedia (15 unit)">
+        </div>
+
+        <!-- Visual Photo Selector -->
+        <div class="form-group">
+          <label class="photo-picker-label">Ganti Foto Produk (Koleksi VI VE RE)</label>
+          <div class="photo-picker-grid" id="editPhotoPickerGrid">
+            <!-- Dynamically Rendered Photo Swatches -->
+          </div>
+          <input type="text" id="editProdImage" class="auth-input" style="background: #181615; color: #FFF; font-size: 0.8rem;" placeholder="Atau masukkan URL foto custom (https://... atau asset/...)">
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-top: 10px;">
+          <button type="submit" class="btn-primary-admin" style="flex: 1; padding: 12px; justify-content: center;">
+            Simpan Perubahan
+          </button>
+          <button type="button" class="btn-topbar-link btn-visit-store" id="cancelEditProductBtn" style="padding: 12px 20px;">
+            Batal
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ORDER DETAIL MODAL -->
+  <div class="vvr-admin-modal-backdrop" id="orderDetailModal">
+    <div class="vvr-admin-modal">
+      <div class="vvr-tx-header">
+        <div class="vvr-tx-title-box">
+          <span class="vvr-tx-badge">DETAIL TRANSAKSI</span>
+          <h2 class="vvr-tx-title" id="orderDetailModalTitle">Pesanan #ORD-...</h2>
+        </div>
+        <button type="button" class="vvr-tx-close" id="closeOrderDetailModalBtn">✕</button>
+      </div>
+      <div class="vvr-tx-body" id="orderDetailModalBody">
+        <!-- Dynamically Populated -->
+      </div>
+    </div>
+  </div>
+
+  <!-- AUTOMATED TEST RESULTS MODAL -->
+  <div class="vvr-admin-modal-backdrop" id="testResultModal">
+    <div class="vvr-admin-modal" style="max-width: 600px;">
+      <div class="vvr-tx-header">
+        <div class="vvr-tx-title-box">
+          <span class="vvr-tx-badge" style="background: rgba(16, 185, 129, 0.2); color: #10B981; border-color: rgba(16, 185, 129, 0.4);">QA AUTOMATED SUITE</span>
+          <h2 class="vvr-tx-title">Hasil Uji Otomatis Sistem</h2>
+        </div>
+        <button type="button" class="vvr-tx-close" id="closeTestResultModalBtn">✕</button>
+      </div>
+      <div class="vvr-tx-body" style="padding: 20px;">
+        <div id="testStatusBanner" style="padding: 14px 18px; border-radius: 8px; margin-bottom: 16px; font-weight: 700; font-size: 0.95rem;"></div>
+        <div style="font-size: 0.82rem; font-weight: 700; color: #FFF; margin-bottom: 8px;">Log Eksekusi Pipeline Pengujian:</div>
+        <div id="testLogsContainer" style="background: #0E0D0C; border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 14px; max-height: 280px; overflow-y: auto; font-family: monospace; font-size: 0.78rem; display: flex; flex-direction: column; gap: 6px;"></div>
+      </div>
+      <div class="vvr-tx-footer" style="justify-content: flex-end;">
+        <button type="button" class="vvr-tx-btn-next" id="closeTestResultModalDoneBtn">Tutup Laporan</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="supabase-config.js"></script>
+  <script src="transaction.js"></script>
+  <script src="admin.js"></script>
+</body>
+
+</html>

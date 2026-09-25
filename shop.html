@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop / Produk - VI VE RE Furniture & Home Goods</title>
+  <meta name="description"
+    content="Jelajahi koleksi furniture dan perabot rumah VI VE RE. Filter berdasarkan kategori, harga, dan temukan furnitur impian Anda dengan mudah.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="shop.css">
+  <link rel="stylesheet" href="transaction.css">
+</head>
+
+<body>
+
+  <!-- 1. ANNOUNCEMENT TOP BAR -->
+  <div class="announcement-bar">
+    <span>THIS WEEKEND: <strong>SALE 20% OFF</strong> ON ALL PRODUCTS</span>
+  </div>
+
+  <!-- 2. TOP INFO & SEARCH BAR -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-location">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        <span>Jl. Gading Serpong Boulevard Blok O No. 7 & 8, Pagedangan, Tangerang, Banten 15334</span>
+      </div>
+      <div class="search-box-wrapper">
+        <select class="category-select" id="searchCategorySelect" aria-label="Select Category">
+          <option value="all">All Categories</option>
+          <option value="armchairs">Armchairs</option>
+          <option value="sofas">Sofas</option>
+          <option value="chairs">Chairs</option>
+          <option value="tables">Tables</option>
+          <option value="cabinets">Cabinets</option>
+          <option value="decor">Decor</option>
+        </select>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search product...">
+        <button class="search-btn" id="searchSubmitBtn" aria-label="Cari produk">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="top-phone">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path
+            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+          </path>
+        </svg>
+        <span>(+62) 8119 4237 03</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. MAIN HEADER / NAVIGATION -->
+  <header class="main-header">
+    <div class="container">
+      <a href="index.html" class="brand-logo">
+        <img src="asset/logo.png" alt="VI VE RE Furniture" class="brand-logo-img">
+      </a>
+
+      <!-- Mobile Menu Toggle -->
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+      </button>
+
+      <nav>
+        <div class="nav-overlay" id="navOverlay"></div>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop / Produk</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button class="action-btn" aria-label="Account">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </button>
+        <button class="action-btn" aria-label="Wishlist">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+            </path>
+          </svg>
+        </button>
+        <button class="action-btn" id="openCartBtn" aria-label="Cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="cart-count" id="cartCountBadge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- BREADCRUMB -->
+  <div class="shop-breadcrumb">
+    <div class="container">
+      <span><a href="index.html">Home</a></span>
+      <span class="breadcrumb-sep">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </span>
+      <span class="breadcrumb-current">Shop / Produk</span>
+    </div>
+  </div>
+
+  <!-- SHOP PAGE MAIN LAYOUT -->
+  <main class="shop-main">
+    <div class="container">
+      <div class="shop-layout">
+
+        <!-- ================================================================
+             SIDEBAR FILTERS
+             ================================================================ -->
+        <aside class="shop-sidebar" id="shopSidebar">
+          <div class="sidebar-header">
+            <h2 class="sidebar-title">Filter Produk</h2>
+            <button class="btn-clear-all" id="clearAllFilters">Reset</button>
+          </div>
+
+          <!-- Category Filter -->
+          <div class="filter-group">
+            <h3 class="filter-label">Kategori</h3>
+            <ul class="filter-list" id="categoryFilterList">
+              <li>
+                <label class="filter-check">
+                  <input type="radio" name="category" value="all" checked id="catAll">
+                  <span class="check-custom"></span>
+                  <span>Semua Produk</span>
+                  <span class="filter-count">16</span>
+                </label>
+              </li>
+              <li>
+                <label class="filter-check">
+                  <input type="radio" name="category" value="armchairs" id="catArmchairs">
+                  <span class="check-custom"></span>
+                  <span>Armchairs</span>
+                  <span class="filter-count">5</span>
+                </label>
+              </li>
+              <li>
+                <label class="filter-check">
+                  <input type="radio" name="category" value="sofas" id="catSofas">
+                  <span class="check-custom"></span>
+                  <span>Sofas</span>
+                  <span class="filter-count">3</span>
+                </label>
+              </li>
+              <li>
+                <label class="filter-check">
+                  <input type="radio" name="category" value="chairs" id="catChairs">
+                  <span class="check-custom"></span>
+                  <span>Chairs</span>
+                  <span class="filter-count">4</span>
+                </label>
+              </li>
+              <li>
+                <label class="filter-check">
+                  <input type="radio" name="category" value="tables" id="catTables">
+                  <span class="check-custom"></span>
+                  <span>Tables</span>
+                  <span class="filter-count">2</span>
+                </label>
+              </li>
+              <li>
+                <label class="filter-check">
+                  <input type="radio" name="category" value="decor" id="catDecor">
+                  <span class="check-custom"></span>
+                  <span>Decor</span>
+                  <span class="filter-count">2</span>
+                </label>
+              </li>
+            </ul>
+          </div>
+
+          <div class="filter-divider"></div>
+
+          <!-- Price Range Filter -->
+          <div class="filter-group">
+            <h3 class="filter-label">Rentang Harga</h3>
+            <div class="price-range-wrapper">
+              <div class="price-display-row">
+                <span class="price-disp" id="priceMinDisplay">Rp 0</span>
+                <span style="color: var(--text-light);">—</span>
+                <span class="price-disp" id="priceMaxDisplay">Rp 25.000.000</span>
+              </div>
+              <input type="range" class="price-slider" id="priceSlider" min="0" max="25000000" value="25000000" step="500000">
+              <div class="price-slider-labels">
+                <span>Rp 0</span>
+                <span>Rp 25 jt+</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="filter-divider"></div>
+
+          <!-- Rating Filter -->
+          <div class="filter-group">
+            <h3 class="filter-label">Rating Minimal</h3>
+            <div class="rating-filter-list">
+              <label class="filter-check">
+                <input type="radio" name="rating" value="0" checked id="ratAll">
+                <span class="check-custom"></span>
+                <span>Semua Rating</span>
+              </label>
+              <label class="filter-check">
+                <input type="radio" name="rating" value="4" id="rat4">
+                <span class="check-custom"></span>
+                <span class="star-row">
+                  <span class="star filled">★</span><span class="star filled">★</span>
+                  <span class="star filled">★</span><span class="star filled">★</span>
+                  <span class="star">★</span>
+                  <span style="margin-left: 4px; font-size:0.8rem;">& Ke Atas</span>
+                </span>
+              </label>
+              <label class="filter-check">
+                <input type="radio" name="rating" value="3" id="rat3">
+                <span class="check-custom"></span>
+                <span class="star-row">
+                  <span class="star filled">★</span><span class="star filled">★</span>
+                  <span class="star filled">★</span><span class="star">★</span>
+                  <span class="star">★</span>
+                  <span style="margin-left: 4px; font-size:0.8rem;">& Ke Atas</span>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="filter-divider"></div>
+
+          <!-- Badge / Status Filter -->
+          <div class="filter-group">
+            <h3 class="filter-label">Status Produk</h3>
+            <div class="badge-filter-list">
+              <label class="filter-check">
+                <input type="checkbox" id="filterSale" value="SALE">
+                <span class="check-custom checkbox-custom"></span>
+                <span>On Sale</span>
+                <span class="filter-badge badge-sale-sm">SALE</span>
+              </label>
+              <label class="filter-check">
+                <input type="checkbox" id="filterNew" value="NEW">
+                <span class="check-custom checkbox-custom"></span>
+                <span>Produk Baru</span>
+                <span class="filter-badge badge-new-sm">NEW</span>
+              </label>
+              <label class="filter-check">
+                <input type="checkbox" id="filterHot" value="HOT">
+                <span class="check-custom checkbox-custom"></span>
+                <span>Best Seller</span>
+                <span class="filter-badge badge-hot-sm">HOT</span>
+              </label>
+            </div>
+          </div>
+
+          <button class="btn-apply-filter" id="applyFiltersBtn">Terapkan Filter</button>
+        </aside>
+
+        <!-- ================================================================
+             PRODUCTS AREA (Right)
+             ================================================================ -->
+        <div class="shop-products-area">
+
+          <!-- Sort & Results Header -->
+          <div class="shop-toolbar">
+            <div class="toolbar-left">
+              <p class="results-text">Menampilkan <strong id="shopResultCount">16</strong> produk</p>
+            </div>
+            <div class="toolbar-right">
+              <div class="sort-wrapper">
+                <label for="sortSelect" class="sort-label">Urutkan:</label>
+                <select class="sort-select" id="sortSelect">
+                  <option value="default">Terbaru</option>
+                  <option value="price-asc">Harga: Terendah</option>
+                  <option value="price-desc">Harga: Tertinggi</option>
+                  <option value="name-asc">Nama: A–Z</option>
+                  <option value="name-desc">Nama: Z–A</option>
+                </select>
+              </div>
+              <div class="view-toggle">
+                <button class="view-btn active" id="gridViewBtn" aria-label="Grid View">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg>
+                </button>
+                <button class="view-btn" id="listViewBtn" aria-label="List View">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Active Filters Tags -->
+          <div class="active-filters-row" id="activeFiltersRow" style="display:none;">
+            <span class="af-label">Filter aktif:</span>
+            <div class="active-filter-tags" id="activeFilterTags"></div>
+          </div>
+
+          <!-- Products Grid -->
+          <div class="shop-grid" id="shopProductsGrid">
+            <!-- Rendered by shop.js -->
+          </div>
+
+          <!-- Pagination -->
+          <div class="shop-pagination" id="shopPagination">
+            <button class="page-btn" id="prevPageBtn" disabled aria-label="Previous page">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <div class="page-numbers" id="pageNumbers"></div>
+            <button class="page-btn" id="nextPageBtn" aria-label="Next page">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="main-footer" id="footer-section">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo">
+            <img src="asset/logo.png" alt="VI VE RE Furniture" class="brand-logo-img">
+          </a>
+          <p class="footer-desc">
+            Menghadirkan keindahan, kenyamanan, dan kualitas tanpa kompromi untuk melengkapi hunian terbaik Anda.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-icon" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+            <a href="#" class="social-icon" aria-label="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+              </svg>
+            </a>
+            <a href="#" class="social-icon" aria-label="Twitter">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Navigasi Cepat</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop / Produk</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="login.html">Login / Akun</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Kategori Populer</h4>
+          <ul class="footer-links">
+            <li><a href="shop.html?cat=armchairs">Armchairs & Lounge</a></li>
+            <li><a href="shop.html?cat=chairs">Dining & Study Chairs</a></li>
+            <li><a href="shop.html?cat=sofas">Modern Sofas</a></li>
+            <li><a href="shop.html?cat=tables">Wooden Tables</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Hubungi Kami</h4>
+          <ul class="footer-contact">
+            <li><span>📍</span><span>Jl. Gading Serpong Boulevard Blok O No. 7 & 8, Pagedangan, Tangerang, Banten</span></li>
+            <li><span>📞</span><span>(+62) 8119 4237 03</span></li>
+            <li><span>✉️</span><span>customercare@viverecollection.com</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 VI VE RE Furniture Store. All Rights Reserved.</div>
+        <div style="color: var(--text-light);">Designed with warmth and elegance.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SLIDE-OUT CART DRAWER -->
+  <div class="cart-backdrop" id="cartBackdrop"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Cart">
+    <div class="drawer-header">
+      <div class="drawer-title">
+        <span>Keranjang Belanja</span>
+        <span class="drawer-items-count" id="drawerBadge">0 item</span>
+      </div>
+      <button class="btn-close-drawer" id="closeCartBtn" aria-label="Tutup Keranjang">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="drawer-body">
+      <div class="cart-items-list" id="cartItemsContainer"></div>
+      <div class="cart-empty-state" id="cartEmptyState">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        <p style="font-weight: 700; margin-bottom: 4px;">Keranjang Masih Kosong</p>
+        <p style="font-size: 0.85rem;">Yuk pilih produk furniture favorit Anda!</p>
+      </div>
+    </div>
+    <div class="drawer-footer" id="drawerFooter">
+      <div class="subtotal-row">
+        <span>Subtotal</span>
+        <span id="cartSubtotal" style="font-weight: 700;">Rp 0</span>
+      </div>
+      <div class="subtotal-row">
+        <span style="color: var(--text-muted); font-size: 0.82rem;">Estimasi Ongkir</span>
+        <span style="font-size: 0.82rem; color: #2E8540; font-weight: 600;">GRATIS</span>
+      </div>
+      <div class="subtotal-row total-amount">
+        <span>Total Pembayaran</span>
+        <span id="cartTotal" style="color: var(--primary);">Rp 0</span>
+      </div>
+      <button class="btn-checkout" id="checkoutBtn">
+        <span>Lanjut ke Pembayaran</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast-notice" id="toastNotice">
+    <span class="toast-icon">✓</span>
+    <span id="toastMessage">Produk berhasil ditambahkan ke keranjang!</span>
+  </div>
+
+  <!-- Mobile Filter Toggle (appears on mobile) -->
+  <button class="mobile-filter-toggle" id="mobileFilterToggle" aria-label="Buka Filter">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="4" y1="6" x2="11" y2="6"></line>
+      <line x1="13" y1="6" x2="20" y2="6"></line>
+      <line x1="4" y1="12" x2="7" y2="12"></line>
+      <line x1="9" y1="12" x2="20" y2="12"></line>
+      <line x1="4" y1="18" x2="13" y2="18"></line>
+      <line x1="15" y1="18" x2="20" y2="18"></line>
+    </svg>
+    <span>Filter</span>
+    <span class="mobile-filter-badge" id="mobileFilterBadge" style="display:none;">0</span>
+  </button>
+
+  <!-- Supabase & Auth Integration -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="auth-nav.js"></script>
+  <script src="transaction.js"></script>
+  <script src="app.js"></script>
+  <script src="shop.js"></script>
+</body>
+
+</html>

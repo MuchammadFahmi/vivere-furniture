@@ -1,0 +1,887 @@
+/* ==========================================================================
+   VI VE RE - Transaction & Payment Gateway System (transaction.css)
+   Luxury Checkout Modal, Delivery Selection, Payment Gateway & Invoice
+   ========================================================================== */
+
+/* Modal Backdrop */
+.vvr-tx-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 14, 13, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.28s ease, visibility 0.28s ease;
+}
+
+.vvr-tx-backdrop.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Modal Container */
+.vvr-tx-modal {
+  background: #1C1A18;
+  color: #F6F4F0;
+  width: 100%;
+  max-width: 760px;
+  max-height: 90vh;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(184, 151, 126, 0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translateY(20px) scale(0.98);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+.vvr-tx-backdrop.open .vvr-tx-modal {
+  transform: translateY(0) scale(1);
+}
+
+/* Modal Header */
+.vvr-tx-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #181615;
+}
+
+.vvr-tx-title-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.vvr-tx-badge {
+  background: rgba(184, 151, 126, 0.15);
+  color: #B8977E;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(184, 151, 126, 0.3);
+}
+
+.vvr-tx-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.vvr-tx-close {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #9E9790;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.vvr-tx-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #FFF;
+}
+
+/* Step Wizard Progress */
+.vvr-tx-steps {
+  display: flex;
+  background: #141312;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 12px 24px;
+  gap: 8px;
+}
+
+.vvr-tx-step-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0.45;
+  transition: opacity 0.2s;
+}
+
+.vvr-tx-step-item.active {
+  opacity: 1;
+}
+
+.vvr-tx-step-item.completed {
+  opacity: 0.85;
+}
+
+.vvr-tx-step-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFF;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vvr-tx-step-item.active .vvr-tx-step-num {
+  background: #B8977E;
+  color: #141312;
+}
+
+.vvr-tx-step-item.completed .vvr-tx-step-num {
+  background: #10B981;
+  color: #FFF;
+}
+
+.vvr-tx-step-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Modal Body */
+.vvr-tx-body {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Two-column layout in Step 1 */
+.vvr-tx-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 24px;
+}
+
+@media (max-width: 720px) {
+  .vvr-tx-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Section Card inside Modal */
+.vvr-tx-section {
+  margin-bottom: 20px;
+}
+
+.vvr-tx-section-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #E6DCCF;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vvr-tx-section-title svg {
+  color: #B8977E;
+}
+
+/* Form inputs */
+.vvr-tx-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.vvr-tx-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.vvr-tx-field label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #B8B0A8;
+}
+
+.vvr-tx-input,
+.vvr-tx-select,
+.vvr-tx-textarea {
+  background: #141312;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #FFF;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+
+.vvr-tx-input:focus,
+.vvr-tx-select:focus,
+.vvr-tx-textarea:focus {
+  outline: none;
+  border-color: #B8977E;
+  box-shadow: 0 0 0 2px rgba(184, 151, 126, 0.2);
+}
+
+.vvr-tx-textarea {
+  min-height: 60px;
+  resize: vertical;
+}
+
+/* Delivery Option Cards */
+.vvr-delivery-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.vvr-delivery-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #141312;
+  border-radius: 10px;
+  padding: 12px 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s;
+}
+
+.vvr-delivery-card:hover {
+  background: #1F1D1A;
+  border-color: rgba(184, 151, 126, 0.4);
+}
+
+.vvr-delivery-card.selected {
+  border-color: #B8977E;
+  background: rgba(184, 151, 126, 0.1);
+}
+
+.vvr-delivery-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.vvr-radio-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.vvr-delivery-card.selected .vvr-radio-dot {
+  border-color: #B8977E;
+}
+
+.vvr-delivery-card.selected .vvr-radio-dot::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #B8977E;
+}
+
+.vvr-delivery-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #FFF;
+}
+
+.vvr-delivery-desc {
+  font-size: 0.75rem;
+  color: #9E9790;
+}
+
+.vvr-delivery-price {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #B8977E;
+  white-space: nowrap;
+}
+
+.vvr-delivery-price.free {
+  color: #10B981;
+}
+
+/* Order Summary Box (Sticky Right Column) */
+.vvr-tx-summary-card {
+  background: #151413;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.vvr-tx-item-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.vvr-tx-item-img {
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  object-fit: cover;
+  background: #242220;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.vvr-tx-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.vvr-tx-item-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #FFF;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.vvr-tx-item-qty {
+  font-size: 0.72rem;
+  color: #9E9790;
+}
+
+.vvr-tx-item-price {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #E6DCCF;
+}
+
+/* Calculation Rows */
+.vvr-calc-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: #9E9790;
+}
+
+.vvr-calc-row.total {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #FFF;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.vvr-calc-row.total span:last-child {
+  color: #B8977E;
+}
+
+/* Voucher box */
+.vvr-voucher-box {
+  display: flex;
+  gap: 8px;
+}
+
+.vvr-voucher-input {
+  flex: 1;
+  background: #141312;
+  border: 1px dashed rgba(184, 151, 126, 0.4);
+  color: #FFF;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.vvr-voucher-btn {
+  background: #2A2624;
+  border: 1px solid rgba(184, 151, 126, 0.3);
+  color: #B8977E;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.vvr-voucher-btn:hover {
+  background: #B8977E;
+  color: #141312;
+}
+
+/* Step 2: Payment Gateway Grid */
+.vvr-payment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.vvr-payment-card {
+  background: #141312;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.2s;
+}
+
+.vvr-payment-card:hover {
+  border-color: rgba(184, 151, 126, 0.4);
+  background: #1E1C1A;
+}
+
+.vvr-payment-card.selected {
+  border-color: #B8977E;
+  background: rgba(184, 151, 126, 0.12);
+  box-shadow: 0 0 12px rgba(184, 151, 126, 0.15);
+}
+
+.vvr-payment-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1.2rem;
+}
+
+.vvr-payment-meta {
+  flex: 1;
+}
+
+.vvr-payment-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #FFF;
+}
+
+.vvr-payment-tag {
+  font-size: 0.7rem;
+  color: #9E9790;
+}
+
+/* Step 3: Interactive Payment Screen */
+.vvr-pay-screen {
+  background: #151413;
+  border: 1px solid rgba(184, 151, 126, 0.25);
+  border-radius: 14px;
+  padding: 24px;
+  text-align: center;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.vvr-timer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(245, 158, 11, 0.15);
+  color: #F59E0B;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.vvr-va-box {
+  background: #0E0D0C;
+  border: 1px dashed rgba(184, 151, 126, 0.4);
+  border-radius: 10px;
+  padding: 16px;
+  margin: 16px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.vvr-va-label {
+  font-size: 0.75rem;
+  color: #9E9790;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.vvr-va-number {
+  font-family: monospace;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #B8977E;
+  letter-spacing: 2px;
+}
+
+.vvr-copy-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFF;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.vvr-copy-btn:hover {
+  background: #B8977E;
+  color: #141312;
+}
+
+/* QRIS Display */
+.vvr-qris-box {
+  background: #FFF;
+  border-radius: 14px;
+  padding: 14px;
+  display: inline-block;
+  margin: 14px auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  max-width: 250px;
+}
+
+.vvr-qris-img {
+  width: 100%;
+  max-width: 210px;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
+}
+
+.vvr-qris-svg {
+  width: 170px;
+  height: 170px;
+}
+
+/* Payment Confirmation */
+.vvr-pay-confirm-box {
+  margin-top: 22px;
+  text-align: center;
+}
+
+.vvr-confirm-pay-btn {
+  background: linear-gradient(135deg, #B8977E 0%, #9A7B64 100%);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 10px;
+  padding: 14px 28px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 320px;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 16px rgba(184, 151, 126, 0.35);
+}
+
+.vvr-confirm-pay-btn:hover {
+  background: linear-gradient(135deg, #C7A48A 0%, #8C6E57 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(184, 151, 126, 0.5);
+}
+
+.vvr-pay-confirm-hint {
+  font-size: 0.75rem;
+  color: #9E9790;
+  margin-top: 8px;
+}
+
+/* Simulation Test Banner (Backward compatibility fallback) */
+.vvr-test-simulator-box {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px dashed #10B981;
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  text-align: left;
+}
+
+.vvr-test-simulator-btn {
+  background: #10B981;
+  color: #FFF;
+  border: none;
+  font-weight: 700;
+  font-size: 0.78rem;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s;
+}
+
+.vvr-test-simulator-btn:hover {
+  background: #059669;
+}
+
+/* Step 4: Invoice Official Print / Display */
+.vvr-invoice-card {
+  background: #141312;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.vvr-invoice-stamp {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border: 2px solid #10B981;
+  color: #10B981;
+  font-weight: 800;
+  font-size: 0.85rem;
+  padding: 4px 12px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  transform: rotate(-5deg);
+}
+
+.vvr-invoice-header {
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.vvr-invoice-id {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #FFF;
+}
+
+.vvr-invoice-meta {
+  font-size: 0.8rem;
+  color: #9E9790;
+  margin-top: 4px;
+}
+
+.vvr-invoice-tracking {
+  background: rgba(184, 151, 126, 0.12);
+  border: 1px solid rgba(184, 151, 126, 0.3);
+  padding: 10px 14px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  font-size: 0.82rem;
+}
+
+/* Modal Footer */
+.vvr-tx-footer {
+  padding: 16px 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #181615;
+}
+
+.vvr-tx-btn-back {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #E6DCCF;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.vvr-tx-btn-back:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #FFF;
+}
+
+.vvr-tx-btn-next {
+  background: #B8977E;
+  color: #141312;
+  border: none;
+  padding: 12px 26px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.vvr-tx-btn-next:hover {
+  background: #C5A880;
+  box-shadow: 0 4px 14px rgba(184, 151, 126, 0.4);
+}
+
+/* Admin Order Details Modal */
+.vvr-admin-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(6px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.25s;
+}
+
+.vvr-admin-modal-backdrop.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.vvr-admin-modal {
+  background: #1C1A18;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  width: 100%;
+  max-width: 680px;
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* ==========================================================================
+   TRANSACTION MODAL RESPONSIVE STYLES
+   ========================================================================== */
+@media (max-width: 640px) {
+  .vvr-tx-backdrop {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .vvr-tx-modal {
+    max-height: 92vh;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .vvr-tx-header {
+    padding: 14px 18px;
+  }
+
+  .vvr-tx-title {
+    font-size: 1.05rem;
+  }
+
+  .vvr-tx-steps {
+    padding: 10px 14px;
+    gap: 4px;
+    overflow-x: auto;
+  }
+
+  .vvr-tx-step-item {
+    gap: 6px;
+  }
+
+  .vvr-tx-step-num {
+    width: 22px;
+    height: 22px;
+    font-size: 0.7rem;
+    flex-shrink: 0;
+  }
+
+  .vvr-tx-step-label {
+    font-size: 0.72rem;
+  }
+
+  .vvr-tx-body {
+    padding: 16px;
+  }
+
+  .vvr-tx-form-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .vvr-tx-footer {
+    padding: 14px 16px;
+    flex-direction: column-reverse;
+    gap: 10px;
+  }
+
+  .vvr-tx-btn-back,
+  .vvr-tx-btn-next {
+    width: 100%;
+    justify-content: center;
+    padding: 12px;
+  }
+
+  .vvr-qris-card {
+    padding: 16px;
+  }
+
+  .vvr-qris-img {
+    max-width: 220px;
+  }
+}
+
+@media (max-width: 480px) {
+  .vvr-tx-steps {
+    padding: 8px 12px;
+  }
+
+  .vvr-tx-step-label {
+    font-size: 0.68rem;
+  }
+
+  .vvr-payment-methods {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .vvr-qris-img {
+    max-width: 190px;
+  }
+}
+
